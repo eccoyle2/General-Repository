@@ -5,6 +5,8 @@ date: "5/28/2021"
 output: 
   word_document: 
     keep_md: yes
+    fig_width: 9
+    fig_height: 5
   html_document: 
     keep_md: yes
 ---

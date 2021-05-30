@@ -7,34 +7,102 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+
+
+
+
+
+```r
+library(tidyverse)
 ```
 
+```
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+```
 
+```
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+```
 
+```
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
 
-```{r}
-library(tidyverse)
+```r
 library(StereoMorph)
 library(ggplot2)
 library(here)
+```
+
+```
+## here() starts at C:/Users/ericc/Desktop/General-Repository
+```
+
+```r
 library(ggthemes)
 library(paletteer)
 ```
 
-```{r}
+
+```r
 library(ggstatsplot)
 ```
-```{r}
+
+```
+## You can cite this package as:
+##      Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
+##      PsyArxiv. doi:10.31234/osf.io/p7mku
+```
+
+```r
 reef_fish <- readr::read_csv("my_data/105_coral_reef_dataset.csv")
 ```
 
-```{r}
+```
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   Species = col_character(),
+##   Family = col_character(),
+##   Prey = col_character(),
+##   Body_length = col_double(),
+##   Head_length = col_double(),
+##   Upper_jaw_length = col_double(),
+##   Body_depth = col_double(),
+##   Caudal_peduncle_depth = col_double(),
+##   Jaws_to_eye_distance = col_double(),
+##   Fineness_ratio = col_double()
+## )
+```
+
+
+```r
 glimpse(reef_fish)
 ```
 
-```{r}
+```
+## Rows: 81
+## Columns: 10
+## $ Species               <chr> "Abudefduf_sordidus", "Acanthurus_achilles", "Ac~
+## $ Family                <chr> "Pomacentridae", "Acanthuridae", "Acanthuridae",~
+## $ Prey                  <chr> "benthic", "benthic", "benthic", "benthic", "pla~
+## $ Body_length           <dbl> 0.7224, 0.7030, 0.7217, 0.7148, 0.7586, 0.6963, ~
+## $ Head_length           <dbl> 0.2283, 0.1804, 0.1562, 0.1569, 0.1627, 0.1873, ~
+## $ Upper_jaw_length      <dbl> 0.0455, 0.0277, 0.0328, 0.0356, 0.0276, 0.0343, ~
+## $ Body_depth            <dbl> 0.4162, 0.3783, 0.3689, 0.3757, 0.2865, 0.3592, ~
+## $ Caudal_peduncle_depth <dbl> 0.1444, 0.0791, 0.0966, 0.0881, 0.1328, 0.0945, ~
+## $ Jaws_to_eye_distance  <dbl> 0.0906, 0.1398, 0.1704, 0.1742, 0.1003, 0.0901, ~
+## $ Fineness_ratio        <dbl> 1.7359, 1.8584, 1.9565, 1.9027, 2.6482, 1.9385, ~
+```
+
+
+```r
 reef_fish%>%
   group_by(Prey)%>%
   summarise(mean_body_length=mean(Body_length),
@@ -44,9 +112,19 @@ reef_fish%>%
             mean_jaw_distance=mean(Jaws_to_eye_distance))
 ```
 
+```
+## # A tibble: 2 x 6
+##   Prey       mean_body_length mean_body_depth mean_fineness mean_cd_depth
+##   <chr>                 <dbl>           <dbl>         <dbl>         <dbl>
+## 1 benthic               0.747           0.345          2.22        0.104 
+## 2 planktonic            0.762           0.270          3.06        0.0900
+## # ... with 1 more variable: mean_jaw_distance <dbl>
+```
 
 
-```{r}
+
+
+```r
 #install.packages("ggExtra")
 #install.packages("ColorPalette")
 library(ggExtra)
@@ -55,11 +133,13 @@ library(ColorPalette)
 
 
 
-```{r}
+
+```r
 #install.packages("ggpubr")
 library(ggpubr)
 ```
-```{r}
+
+```r
 reef_fish%>%
   ggplot(aes(x=Prey,y=Caudal_peduncle_depth,color=Prey))+
   geom_boxplot()+
@@ -69,7 +149,10 @@ reef_fish%>%
   labs(title = "Caudal Peduncle Depth of Planktivorous and NP Fish",x="Prey Type",y="Caudal Peduncle Depth")+
   stat_compare_means(method = "t.test")
 ```
-```{r}
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+```r
 reef_fish%>%
   ggplot(aes(x=Family,y=Caudal_peduncle_depth,color=Prey))+
   geom_boxplot()+
@@ -79,8 +162,11 @@ reef_fish%>%
   labs(title = "Caudal Peduncle Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
 ```
 
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
-```{r}
+
+
+```r
 reef_fish%>%
   ggplot(aes(x=Prey,y=Fineness_ratio,color=Prey))+
   geom_boxplot()+
@@ -89,7 +175,10 @@ reef_fish%>%
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
   labs(title = "Fineness Ratio of Planktivorous and NP Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
 ```
-```{r}
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
+```r
 reef_fish%>%
   ggplot(aes(x=Family,y=Fineness_ratio,color=Prey))+
   geom_boxplot()+
@@ -100,7 +189,10 @@ reef_fish%>%
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
 
-```{r}
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+
+
+```r
 reef_fish%>%
   ggplot(aes(x=Prey,y=Body_depth,color=Prey))+
   geom_boxplot()+
@@ -109,7 +201,10 @@ reef_fish%>%
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
   labs(title = "Body Depth of Planktivorous and NP Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
 ```
-```{r}
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+```r
 reef_fish%>%
   ggplot(aes(x=Family,y=Body_depth,color=Prey))+
   geom_boxplot()+
@@ -119,7 +214,10 @@ reef_fish%>%
   labs(title = "Body Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
 ```
 
-```{r}
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+
+
+```r
 P<-reef_fish%>%
   ggplot(aes(x=Prey,y=Body_length,color=Prey))+
   geom_boxplot()+
@@ -130,8 +228,11 @@ P<-reef_fish%>%
 P+stat_compare_means(method = "t.test")
 ```
 
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
-```{r}
+
+
+```r
 reef_fish%>%
   ggplot(aes(x=Family,y=Body_length,color=Prey))+
   geom_boxplot()+
@@ -141,9 +242,12 @@ reef_fish%>%
   labs(title = "Body Length of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
 ```
 
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 
-```{r}
+
+
+```r
 reef_fish%>%
   ggplot(aes(x=Caudal_peduncle_depth,y=Fineness_ratio,color=Prey))+
   geom_point(size=2.7)+
@@ -159,7 +263,14 @@ reef_fish%>%
   labs(title = "Fineness Ratio across Caudal Peduncle Depth Values",x="Caudal Peducle Depth",y="Fineness Ratio")
 ```
 
-```{r}
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
+
+```r
 reef_fish%>%
   ggplot(aes(x=Body_depth,y=Fineness_ratio,color=Prey))+
   geom_point(size=2.7)+
@@ -174,7 +285,14 @@ reef_fish%>%
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
   labs(title = "Contribution of Body Depth to Different Fineness Ratios",x="Body Depth",y="Fineness Ratio")
 ```
-```{r}
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
+```r
 reef_fish%>%
   ggplot(aes(x=Body_length,y=Fineness_ratio,color=Prey))+
   geom_point(size=2.7)+
@@ -189,4 +307,10 @@ reef_fish%>%
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
   labs(title = "Contribution of Body Length to Different Fineness Ratios",x="Body Length",y="Fineness Ratio")
 ```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](Fish-data-analysis_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 

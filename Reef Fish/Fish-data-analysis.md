@@ -150,7 +150,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Caudal Peduncle Depth of Planktivorous and NP Fish",x="Prey Type",y="Caudal Peduncle Depth")+
+  labs(title = "CPD of Planktivorous and NP Fish",x="Prey Type",y="Caudal Peduncle Depth")+
   stat_compare_means(method = "t.test")
 ```
 
@@ -163,7 +163,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Caudal Peduncle Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
+  labs(title = "CPD of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
@@ -177,7 +177,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Fineness Ratio of Planktivorous and NP Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
+  labs(title = "FR of Planktivorous and NP Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-10-1.png)<!-- -->
@@ -189,7 +189,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Fineness Ratio of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")+
+  labs(title = "FR of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")+
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
 
@@ -203,7 +203,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Body Depth of Planktivorous and NP Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
+  labs(title = "BD of Planktivorous and NP Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
@@ -215,7 +215,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Body Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
+  labs(title = "BD of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
@@ -228,7 +228,7 @@ P<-reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Body Length of Planktivorous and NP Fish",x="Prey Type",y="Body Length")
+  labs(title = "BL of Planktivorous and NP Fish",x="Prey Type",y="Body Length")
 P+stat_compare_means(method = "t.test")
 ```
 
@@ -243,7 +243,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Body Length of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
+  labs(title = "BL of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-15-1.png)<!-- -->
@@ -264,7 +264,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Fineness Ratio across Caudal Peduncle Depth Values",x="Caudal Peducle Depth",y="Fineness Ratio")
+  labs(title = "FR across CPD Values",x="Caudal Peducle Depth",y="Fineness Ratio")
 ```
 
 ```
@@ -287,7 +287,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Contribution of Body Depth to Different Fineness Ratios",x="Body Depth",y="Fineness Ratio")
+  labs(title = "Contribution of BD to Different FR Values",x="Body Depth",y="Fineness Ratio")
 ```
 
 ```
@@ -309,7 +309,7 @@ reef_fish%>%
    scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
-  labs(title = "Contribution of Body Length to Different Fineness Ratios",x="Body Length",y="Fineness Ratio")
+  labs(title = "Contribution of BL to Different FR Values",x="Body Length",y="Fineness Ratio")
 ```
 
 ```

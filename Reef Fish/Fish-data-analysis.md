@@ -3,6 +3,8 @@ title: "Reef data analysis"
 author: "Eric Coyle"
 date: "5/28/2021"
 output: 
+  word_document: 
+    keep_md: yes
   html_document: 
     keep_md: yes
 ---
@@ -150,7 +152,7 @@ reef_fish%>%
   stat_compare_means(method = "t.test")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
 
 ```r
 reef_fish%>%
@@ -162,7 +164,7 @@ reef_fish%>%
   labs(title = "Caudal Peduncle Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
 
 
 
@@ -176,7 +178,7 @@ reef_fish%>%
   labs(title = "Fineness Ratio of Planktivorous and NP Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-10-1.png)<!-- -->
 
 ```r
 reef_fish%>%
@@ -189,7 +191,7 @@ reef_fish%>%
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-11-1.png)<!-- -->
 
 
 ```r
@@ -202,7 +204,7 @@ reef_fish%>%
   labs(title = "Body Depth of Planktivorous and NP Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 reef_fish%>%
@@ -214,7 +216,7 @@ reef_fish%>%
   labs(title = "Body Depth of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
 
 
 ```r
@@ -228,7 +230,7 @@ P<-reef_fish%>%
 P+stat_compare_means(method = "t.test")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
 
 
 
@@ -242,7 +244,7 @@ reef_fish%>%
   labs(title = "Body Length of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-15-1.png)<!-- -->
 
 
 
@@ -267,7 +269,7 @@ reef_fish%>%
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-16-1.png)<!-- -->
 
 
 ```r
@@ -290,7 +292,7 @@ reef_fish%>%
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-17-1.png)<!-- -->
 
 ```r
 reef_fish%>%
@@ -312,5 +314,5 @@ reef_fish%>%
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-![](Fish-data-analysis_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](Fish-data-analysis_files/figure-docx/unnamed-chunk-18-1.png)<!-- -->
 

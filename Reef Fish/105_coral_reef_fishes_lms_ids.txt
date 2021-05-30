@@ -1,0 +1,12 @@
+Anterior_upper_jaw
+Posterior_upper_jaw
+Center_eye
+Operculum_insertion
+Upper_pectoral_fin
+Anterior_pelvic_fin
+Anterior_dorsal_fin
+Posterior_dorsal_fin
+Anterior_anal_fin
+Posterior_anal_fin
+Dorsal_caudal_fin
+Ventral_caudal_fin

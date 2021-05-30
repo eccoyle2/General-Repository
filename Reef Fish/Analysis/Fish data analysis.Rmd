@@ -1,0 +1,156 @@
+---
+title: "Reef data analysis"
+author: "Eric Coyle"
+date: "5/28/2021"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r}
+library(tidyverse)
+library(StereoMorph)
+library(ggplot2)
+library(here)
+```
+
+```{r}
+library(ggstatsplot)
+```
+```{r}
+reef_fish <- readr::read_csv("my_data/105_coral_reef_dataset.csv")
+```
+
+```{r}
+glimpse(reef_fish)
+```
+
+```{r}
+reef_fish%>%
+  group_by(Prey)%>%
+  summarise(mean_body_length=mean(Body_length),
+            mean_body_depth=mean(Body_depth),
+            mean_fineness=mean(Fineness_ratio),
+            mean_cd_depth=mean(Caudal_peduncle_depth),
+            mean_jaw_distance=mean(Jaws_to_eye_distance))
+```
+
+
+
+```{r}
+#install.packages("ggExtra")
+#install.packages("ColorPalette")
+library(ggExtra)
+library(ColorPalette)
+```
+
+
+
+```{r}
+#install.packages("ggpubr")
+library(ggpubr)
+```
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Prey,y=Caudal_peduncle_depth,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Caudal Peduncle Depth of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Caudal Peduncle Depth")+stat_compare_means(method = "t.test")
+```
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Family,y=Caudal_peduncle_depth,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Caudal Peduncle Dpeth of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Caudal Peduncle Depth")+
+  theme(axis.text.x = element_text(angle = 60, hjust=1))
+```
+
+
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Prey,y=Fineness_ratio,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Fineness Ratio of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
+```
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Family,y=Fineness_ratio,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Fineness Ratio of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Caudal Peduncle Depth")+
+  theme(axis.text.x = element_text(angle = 60, hjust=1))
+```
+
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Prey,y=Body_depth,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Body Depth of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
+```
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Family,y=Body_depth,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Body Depth of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Body Depth")+
+  theme(axis.text.x = element_text(angle = 60, hjust=1))
+```
+
+```{r}
+P<-reef_fish%>%
+  ggplot(aes(x=Prey,y=Body_length,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Caudal Peduncle Dpeth of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Caudal Peduncle Depth")
+P+stat_compare_means(method = "t.test")
+```
+
+
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Family,y=Body_length,color=Prey))+
+  geom_boxplot()+
+  labs(title = "Body Length of Planktivorous and Non planktivorous Fish",x="Prey Type",y="Body Length")+
+  theme(axis.text.x = element_text(angle = 60, hjust=1))
+```
+
+
+
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Caudal_peduncle_depth,y=Fineness_ratio,color=Prey))+
+  geom_point(size=2.7)+
+  scale_x_continuous()+
+  scale_y_continuous()+
+  geom_smooth(method = lm,se=F)+
+  stat_regline_equation(label.y=4.5,aes(label = ..eq.label..)) +
+  stat_regline_equation(label.y=4,aes(label = ..rr.label..))+
+  facet_wrap(~Prey)
+```
+
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Body_depth,y=Fineness_ratio,color=Prey))+
+  geom_point(size=2.7)+
+  scale_x_continuous()+
+  scale_y_continuous()+
+  geom_smooth(method = lm,se=F)+
+  stat_regline_equation(label.y=1.5,aes(label = ..eq.label..)) +
+  stat_regline_equation(label.y=1,aes(label = ..rr.label..))+
+  facet_wrap(~Prey)
+```
+```{r}
+reef_fish%>%
+  ggplot(aes(x=Body_length,y=Fineness_ratio,color=Prey))+
+  geom_point(size=2.7)+
+  scale_x_continuous()+
+  scale_y_continuous()+
+  geom_smooth(method = lm,se=F)+
+  stat_regline_equation(label.y=4.5,aes(label = ..eq.label..)) +
+  stat_regline_equation(label.y=4,aes(label = ..rr.label..))+
+  facet_wrap(~Prey)
+```
+

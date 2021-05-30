@@ -1,0 +1,18 @@
+<shapes type=list>
+	<scaling type=logical names=FALSE length=1 as.numeric=FALSE >NA</scaling>
+	<landmarks.pixel type=matrix rownames=TRUE colnames=FALSE nrow=12 ncol=2 as.numeric=TRUE >
+		Anterior_upper_jaw	34	167
+		Posterior_upper_jaw	80	233
+		Center_eye	120	172
+		Operculum_insertion	173	272
+		Upper_pectoral_fin	234	207
+		Anterior_pelvic_fin	241	282
+		Anterior_dorsal_fin	269	108
+		Posterior_dorsal_fin	597	197
+		Anterior_anal_fin	401	291
+		Posterior_anal_fin	593	234
+		Dorsal_caudal_fin	641	209
+		Ventral_caudal_fin	641	240
+	</landmarks.pixel>
+</shapes>
+

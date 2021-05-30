@@ -149,7 +149,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "CPD of Planktivorous and NP Fish",x="Prey Type",y="Caudal Peduncle Depth")+
   stat_compare_means(method = "t.test")
 ```
@@ -162,7 +162,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "CPD of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
 ```
 
@@ -176,7 +176,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "FR of Planktivorous and NP Fish",x="Prey Type",y="Fineness Ratio")+stat_compare_means(method = "t.test")
 ```
 
@@ -188,7 +188,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "FR of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")+
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
@@ -202,7 +202,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "BD of Planktivorous and NP Fish",x="Prey Type",y="Body Depth")+stat_compare_means(method = "t.test")
 ```
 
@@ -214,7 +214,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "BD of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
 ```
 
@@ -227,7 +227,7 @@ P<-reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "BL of Planktivorous and NP Fish",x="Prey Type",y="Body Length")
 P+stat_compare_means(method = "t.test")
 ```
@@ -242,7 +242,7 @@ reef_fish%>%
   geom_boxplot()+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "BL of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
 ```
 
@@ -263,7 +263,7 @@ reef_fish%>%
   facet_wrap(~Prey)+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "FR across CPD Values",x="Caudal Peducle Depth",y="Fineness Ratio")
 ```
 
@@ -286,7 +286,7 @@ reef_fish%>%
   facet_wrap(~Prey)+
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "Contribution of BD to Different FR Values",x="Body Depth",y="Fineness Ratio")
 ```
 
@@ -308,7 +308,7 @@ reef_fish%>%
   facet_wrap(~Prey)+
    scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1,size = 10),axis.title = element_text(size = 14),plot.title = element_text(size = 16,face = "bold",hjust = .5))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "Contribution of BL to Different FR Values",x="Body Length",y="Fineness Ratio")
 ```
 

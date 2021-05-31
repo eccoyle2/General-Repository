@@ -80,7 +80,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "CPD of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
+  labs(title = "CPD of Planktivorous and NP Fish by Family",x="Family",y="Caudal Peduncle Depth")
 ```
 
 
@@ -100,7 +100,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "FR of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")+
+  labs(title = "FR of Planktivorous and NP Fish by Family",x="Family",y="Caudal Peduncle Depth")+
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
 
@@ -120,7 +120,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "BD of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
+  labs(title = "BD of Planktivorous and NP Fish by Family",x="Family",y="Body Depth")
 ```
 
 ```{r}
@@ -142,7 +142,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "BL of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
+  labs(title = "BL of Planktivorous and NP Fish by Family",x="Family",y="Body Length")
 ```
 
 
@@ -192,5 +192,9 @@ reef_fish%>%
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
   labs(title = "Contribution of BL to Different FR Values",x="Body Length",y="Fineness Ratio")
+```
+
+```{r}
+citation()
 ```
 

@@ -163,7 +163,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "CPD of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")
+  labs(title = "CPD of Planktivorous and NP Fish by Family",x="Family",y="Caudal Peduncle Depth")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
@@ -189,7 +189,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "FR of Planktivorous and NP Fish by Family",x="Prey Type",y="Caudal Peduncle Depth")+
+  labs(title = "FR of Planktivorous and NP Fish by Family",x="Family",y="Caudal Peduncle Depth")+
   theme(axis.text.x = element_text(angle = 60, hjust=1))
 ```
 
@@ -215,7 +215,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "BD of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Depth")
+  labs(title = "BD of Planktivorous and NP Fish by Family",x="Family",y="Body Depth")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
@@ -243,7 +243,7 @@ reef_fish%>%
   scale_color_brewer(palette = "Dark2")+
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1,size = 14),axis.title = element_text(size = 17),plot.title = element_text(size = 20,face = "bold",hjust = .5))+
-  labs(title = "BL of Planktivorous and NP Fish by Family",x="Prey Type",y="Body Length")
+  labs(title = "BL of Planktivorous and NP Fish by Family",x="Family",y="Body Length")
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-15-1.png)<!-- -->
@@ -317,4 +317,33 @@ reef_fish%>%
 ```
 
 ![](Fish-data-analysis_files/figure-docx/unnamed-chunk-18-1.png)<!-- -->
+
+
+```r
+citation()
+```
+
+```
+## 
+## To cite R in publications use:
+## 
+##   R Core Team (2021). R: A language and environment for statistical
+##   computing. R Foundation for Statistical Computing, Vienna, Austria.
+##   URL https://www.R-project.org/.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {R: A Language and Environment for Statistical Computing},
+##     author = {{R Core Team}},
+##     organization = {R Foundation for Statistical Computing},
+##     address = {Vienna, Austria},
+##     year = {2021},
+##     url = {https://www.R-project.org/},
+##   }
+## 
+## We have invested a lot of time and effort in creating R, please cite it
+## when using it for data analysis. See also 'citation("pkgname")' for
+## citing R packages.
+```
 

@@ -198,12 +198,16 @@ reef_fish%>%
 citation()
 ```
 ```{r}
-reef_fish%>%
+t<-reef_fish%>%
   group_by(Family,Prey)%>%
   summarise(mean_body_length=mean(Body_length),
             mean_body_depth=mean(Body_depth),
             mean_fineness=mean(Fineness_ratio),
             mean_cd_depth=mean(Caudal_peduncle_depth),
             mean_jaw_distance=mean(Jaws_to_eye_distance))
+t%>%
+  filter(Prey=="benthic")
+t%>%
+  filter(Prey=="planktonic")
 ```
 

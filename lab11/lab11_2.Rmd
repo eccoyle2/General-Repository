@@ -69,7 +69,7 @@ There are lots of options to manipulate legends. Have a look [here](http://www.s
 ```{r}
 p+theme_linedraw()+
   theme(legend.position = "right",
-        axis.text.x = element_text(angle = 60, hjust=1))+
+        axis.text.x = element_text(angle = 60, hjust=1,size = 15))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,
        y= "n",
@@ -117,8 +117,8 @@ The [R Color Brewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) w
 
 Here I chose the `Paired` palette. Take a moment and experiment with other options.
 ```{r}
-p+scale_fill_brewer(palette = "Paired")+
-  theme(legend.position = "bottom",
+p+scale_fill_brewer(palette = "Dark2")+
+  theme(legend.position = "right",
         axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,

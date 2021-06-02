@@ -347,3 +347,41 @@ citation()
 ## citing R packages.
 ```
 
+```r
+reef_fish%>%
+  group_by(Family,Prey)%>%
+  summarise(mean_body_length=mean(Body_length),
+            mean_body_depth=mean(Body_depth),
+            mean_fineness=mean(Fineness_ratio),
+            mean_cd_depth=mean(Caudal_peduncle_depth),
+            mean_jaw_distance=mean(Jaws_to_eye_distance))
+```
+
+```
+## `summarise()` has grouped output by 'Family'. You can override using the `.groups` argument.
+```
+
+```
+## # A tibble: 16 x 7
+## # Groups:   Family [8]
+##    Family    Prey   mean_body_length mean_body_depth mean_fineness mean_cd_depth
+##    <chr>     <chr>             <dbl>           <dbl>         <dbl>         <dbl>
+##  1 Acanthur~ benth~            0.728           0.375          1.94        0.0988
+##  2 Acanthur~ plank~            0.740           0.286          2.61        0.0966
+##  3 Carangid~ benth~            0.755           0.344          2.22        0.0653
+##  4 Carangid~ plank~            0.806           0.204          3.99        0.0337
+##  5 Chaetodo~ benth~            0.700           0.404          1.74        0.0802
+##  6 Chaetodo~ plank~            0.710           0.426          1.68        0.0956
+##  7 Labridae  benth~            0.779           0.285          2.76        0.128 
+##  8 Labridae  plank~            0.770           0.204          3.80        0.103 
+##  9 Lutjanid~ benth~            0.801           0.308          2.61        0.126 
+## 10 Lutjanid~ plank~            0.790           0.201          3.94        0.0746
+## 11 Nemipter~ benth~            0.783           0.308          2.58        0.109 
+## 12 Nemipter~ plank~            0.796           0.221          3.62        0.0936
+## 13 Pomacant~ benth~            0.697           0.373          1.87        0.0930
+## 14 Pomacant~ plank~            0.719           0.328          2.19        0.108 
+## 15 Pomacent~ benth~            0.738           0.356          2.11        0.134 
+## 16 Pomacent~ plank~            0.759           0.310          2.49        0.113 
+## # ... with 1 more variable: mean_jaw_distance <dbl>
+```
+

@@ -1,34 +1,27 @@
 # BIS15W2021_ecoyle
 
-#Eric Coyle's BIS 15L Repository
+#Eric Coyle's Repository
 
-#Welcome! This repository includes homework, notes, and projects worked on by Eric Coyle as a Student in BIS 15L W 2021 at UC Davis.
+#Welcome! This repository includes past work, projects, and code for ecological, physiological, and biological research.
 
 #Contact Info
 
-#Eric Coyle- Davis, CA 95616
+#Eric Coyle- San Francisco, CA 94116
 
-[My email](eccoyle@ucdavis.edu)
+[My email](ecoyle@sfsu.edu)
+[My second email](eccoyle@ucdavis.edu)
 
 #my cell number 408-350-3621
 
 #A little Backround Info
 
-#Neurology, Physiology and Behavior and SPanish Double Major
+Current Graduate Student in Integrative Biology at SFSU
 
-#Wildlife, Fisheries, and COnservation Minor
+#Neurology, Physiology and Behavior and Spanish Double Major UC Davis
+
+#Wildlife, Fisheries, and Conservation Minor
 
 #Class of 2021 UC Davis
-
-#Links
-
-[Bis 15L Class website](https://jmledford3115.github.io/datascibiol/)
-
-[NPB Website UC Davis](https://www.ucdavis.edu/majors/neurobiology-physiology-and-behavior)
-
-[Spanish Website UC Davis](https://spanish.ucdavis.edu/)
-
-[WFC Website UC Davis](https://wfcb.ucdavis.edu/)
 
 
 #Thank You!

@@ -1,0 +1,126 @@
+---
+title: "Angelo temperature data"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+
+```{r}
+W2015<-read.csv("2015-winter.csv")
+W2016<-read.csv("2016-winter.csv")
+W2017<-read.csv("2017-winter.csv")
+W2018<-read.csv("2018-winter.csv")
+W2019<-read.csv("2019-winter.csv")
+W2020<-read.csv("2020-winter.csv")
+```
+
+
+```{r}
+head(W2015)
+```
+
+```{r}
+w2015_new<-W2015%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+w2016_new<-W2016%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+w2017_new<-W2017%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+w2018_new<-W2018%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+w2019_new<-W2019%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+w2020_new<-W2020%>%
+  separate(col="ï..Time",into=c("date","time"),sep=" ")
+```
+
+```{r}
+w2015_3<-w2015_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+w2015_3
+```
+```{r}
+w2016_3<-w2016_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+w2017_3<-w2017_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+w2018_3<-w2018_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+w2019_3<-w2019_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+w2020_3<-w2020_new%>%
+  separate(col="date",into=c("month","day","year"),sep="/")
+```
+
+```{r}
+test<-full_join(w2015_3,w2016_3)
+test2<-full_join(test,w2017_3)
+test3<-full_join(test2,w2018_3)
+test4<-full_join(test3,w2019_3)
+test5<-full_join(test4,w2020_3)
+```
+```{r}
+table_temp<-test5%>%
+  group_by(month,year)%>%
+  summarise(mean_temp=mean(Angelo.HQ.SF.Eel.Gage.Water.Temp.Outside.CS450.degC),max_temp=max(Angelo.HQ.SF.Eel.Gage.Water.Temp.Outside.CS450.degC),min_temp=min(Angelo.HQ.SF.Eel.Gage.Water.Temp.Outside.CS450.degC))
+table_temp
+```
+```{r}
+table_temp%>%
+  ggplot(aes(x=year,y=mean_temp,color=month))+
+  geom_point()
+```
+```{r}
+table_temp%>%
+  ggplot(aes(x=year,y=min_temp,color=month))+
+  geom_point()
+```
+
+```{r}
+table_temp%>%
+  ggplot(aes(x=year,y=max_temp,color=month,shape=month))+
+  geom_point(size=3)+
+  geom_text(aes(label=max_temp),vjust=.8,hjust=1.2,size=3)+
+  labs(title="Max Winter Temperature of the SF Eel",x="Year",y="Max Temerature")+
+  theme(axis.text.x = element_text(angle = 60,hjust = 1,size=12))+
+  labs(color="Month",shape="Month")
+```
+```{r}
+table_temp%>%
+  ggplot(aes(x=year,y=mean_temp,color=month,shape=month))+
+  geom_point(size=3)+
+  geom_text(aes(label=mean_temp),vjust=.8,hjust=1.2,size=3)+
+  labs(title="Mean Winter Temperature of the SF Eel",x="Year",y="Mean Temerature")+
+  theme(axis.text.x = element_text(angle = 60,hjust = 1,size=12))+
+  labs(color="Month",shape="Month")
+```
+```{r}
+table_temp%>%
+  ggplot(aes(x=year,y=min_temp,color=month,shape=month))+
+  geom_point(size=3)+
+  geom_text(aes(label=min_temp),vjust=.8,hjust=1.2,size=3)+
+  labs(title="Min Winter Temperature of the SF Eel",x="Year",y="Min Temerature")+
+  theme(axis.text.x = element_text(angle = 60,hjust = 1,size=12))+
+  labs(color="Month",shape="Month")
+```
+```{r}
+table_temp%>%
+  mutate(temp_range=(max_temp-min_temp))%>%
+  ggplot(aes(x=year,y=temp_range,color=month,shape=month))+
+  geom_point(size=3)+
+  geom_text(aes(label=temp_range),vjust=.8,hjust=1.2,size=3)+
+  labs(title="Winter Temperature Range of the SF Eel",x="Year",y="Temerature Range")+
+  theme(axis.text.x = element_text(angle = 60,hjust = 1,size=12))+
+  labs(color="Month",shape="Month")
+```
+

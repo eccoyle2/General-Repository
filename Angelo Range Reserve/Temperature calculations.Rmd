@@ -117,10 +117,22 @@ table_temp%>%
 table_temp%>%
   mutate(temp_range=(max_temp-min_temp))%>%
   ggplot(aes(x=year,y=temp_range,color=month,shape=month))+
-  geom_point(size=3)+
-  geom_text(aes(label=temp_range),vjust=.8,hjust=1.2,size=3)+
+  geom_point(size=3)+geom_text(aes(label=temp_range),vjust=.8,hjust=1.2,size=3)+
   labs(title="Winter Temperature Range of the SF Eel",x="Year",y="Temerature Range")+
   theme(axis.text.x = element_text(angle = 60,hjust = 1,size=12))+
   labs(color="Month",shape="Month")
 ```
+```{r}
+test5%>%
+  group_by(month)%>%
+  summarise(mean_temp=mean(Angelo.HQ.SF.Eel.Gage.Water.Temp.Outside.CS450.degC))%>%
+  arrange(desc(mean_temp))
+```
+```{r}
+test5%>%
+  group_by(month)%>%
+  summarise(max_temp=max(Angelo.HQ.SF.Eel.Gage.Water.Temp.Outside.CS450.degC))%>%
+  arrange(desc(max_temp))
+```
+
 

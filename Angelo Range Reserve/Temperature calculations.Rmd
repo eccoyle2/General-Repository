@@ -47,7 +47,6 @@ w2020_new<-W2020%>%
 ```{r}
 w2015_3<-w2015_new%>%
   separate(col="date",into=c("month","day","year"),sep="/")
-w2015_3
 ```
 ```{r}
 w2016_3<-w2016_new%>%

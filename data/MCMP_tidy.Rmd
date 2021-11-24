@@ -1,0 +1,21 @@
+---
+title: "MCMP_tidy"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+```{r}
+final$vial<-as.character(final$vial)
+final%>%
+  ggplot(aes(x=vial,y=umoleO2hrg,fill=vial))+
+  geom_col()+
+  facet_wrap(~treatment)
+```
+

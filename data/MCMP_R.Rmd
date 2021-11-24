@@ -1,0 +1,196 @@
+---
+title: "MCMP_2"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r}
+data<-read.csv("Trial2_11_20_MCMP.csv")
+```
+
+```{r}
+cal<-read.csv("Cal_MCMP_Revised.csv")
+```
+
+```{r}
+O2sat<-read.csv("MCMP_O2_Sat.csv")
+```
+
+
+```{r}
+optode<-function(cal0,T0,cal100,T100,phase,temp) {
+f1=0.801
+deltaPsiK=-0.08
+deltaKsvK=0.000383
+m=22.9
+tan0T100=tan(((cal0+deltaPsiK*(T100-T0)))*pi/180)
+tan0Tm=tan((cal0+(deltaPsiK*(temp-T0)))*pi/180)
+tan100T100=tan(cal100*pi/180)
+tanmTm=tan(phase*pi/180)
+A=tan100T100/tan0T100*1/m*100^2
+B=tan100T100/tan0T100*100+tan100T100/tan0T100*1/m*100-f1*1/m*100-100+f1*100
+C=tan100T100/tan0T100-1
+KsvT100=(-B+(sqrt(B^2-4*A*C)))/(2*A)
+KsvTm=KsvT100+(deltaKsvK*(temp-T100))
+a=tanmTm/tan0Tm*1/m*KsvTm^2
+b=tanmTm/tan0Tm*KsvTm+tanmTm/tan0Tm*1/m*KsvTm-f1*1/m*KsvTm-KsvTm+f1*KsvTm
+c=tanmTm/tan0Tm-1
+saturation=(-((tan(phase*pi/180))/(tan((cal0+(deltaPsiK*(temp-T0)))*pi/180))*
+(KsvT100+(deltaKsvK*(temp-T100)))+(tan(phase*pi/180))/(tan((cal0+(deltaPsiK*
+(temp-T0)))*pi/180))*1/m*(KsvT100+(deltaKsvK*(temp-T100)))-f1*1/m*(KsvT100+
+(deltaKsvK*(temp-T100)))-(KsvT100+(deltaKsvK*(temp-T100)))+f1*(KsvT100+
+(deltaKsvK*(temp-T100))))+(sqrt((((tan(phase*pi/180))/(tan((cal0+(deltaPsiK*
+(temp-T0)))*pi/180))*(KsvT100+(deltaKsvK*(temp-T100)))+(tan(phase*pi/180))/
+(tan((cal0+(deltaPsiK*(temp-T0)))*pi/180))*1/m*(KsvT100+(deltaKsvK*(temp-T100)))
+-f1*1/m*(KsvT100+(deltaKsvK*(temp-T100)))-
+(KsvT100+(deltaKsvK*(temp-T100)))+f1*
+(KsvT100+(deltaKsvK*(temp-T100)))))^2-4*
+((tan(phase*pi/180))/(tan((cal0+(deltaPsiK*
+(temp-T0)))*pi/180))*1/m*(KsvT100+
+(deltaKsvK*(temp-T100)))^2)*((tan(phase*pi/180))/
+(tan((cal0+(deltaPsiK*
+(temp-T0)))*pi/180))-1))))/(2*((tan(phase*pi/180))/
+(tan((cal0+(deltaPsiK*(temp-T0)))*pi/180))*
+1/m*(KsvT100+(deltaKsvK*(temp-T100)))^2))
+}
+```
+
+```{r}
+dataCombin<-merge(data,cal,by="vial")
+```
+
+```{r}
+dataCombin<-merge(dataCombin,O2sat)
+```
+
+```{r}
+f<-function(d) optode(d$cal0,d$T0,d$cal100,d$T100,d$phase,d$temp)
+```
+
+```{r}
+dataCombin$oxygen<-f(dataCombin)
+```
+
+```{r}
+dataCombin$umoleO2<-(dataCombin$oxygen/100)*dataCombin$O2sat
+```
+
+
+
+```{r}
+head(dataCombin)
+dataCombin$time<-as.numeric(dataCombin$time)
+```
+```{r}
+dataCombin$treatment<-as.numeric(dataCombin$treatment)
+```
+
+
+
+```{r}
+library(plyr)
+mlist<-dlply(dataCombin,.(vial, treatment), function(d) lm(umoleO2~time, data=d))
+output<-ldply(mlist, function(m) coef(m))
+output$slope<-abs(output$time)
+```
+
+
+
+```{r}
+meanControl<-mean(output[output$vial=="7","slope"])
+```
+
+```{r}
+meanControl
+```
+
+
+```{r}
+output$adj.slope<-output$slope-meanControl
+```
+
+```{r}
+head(output)
+```
+
+```{r}
+mass<-read.csv("MCMP_mass.csv")
+```
+
+```{r}
+final<-merge(output,mass)
+```
+
+```{r}
+final$umoleO2minmg<-(final$adj.slope*(70/1000))/(final$mass)
+final$umoleO2hrg<-final$umoleO2minmg*1000*60
+```
+
+```{r}
+head(final)
+```
+
+
+```{r}
+library(plotrix)
+meanMR<-ddply(final, .(treatment), function(d) mean(d$umoleO2hrg, na.rm=T))
+names(meanMR)<-c("treatment","meanMR")
+sdMR<-ddply(final, .(treatment), function(d) sd(d$umoleO2hrg, na.rm=T))
+names(sdMR)<-c("treatment","sdMR")
+seMR<-ddply(final, .(treatment), function(d) std.error(d$umoleO2hrg, na.rm=T))
+names(seMR)<-c("treatment","seMR")
+meanData<-merge(meanMR, sdMR)
+meanData<-merge(meanData, seMR)
+meanData<-merge(meanData, seMR)
+CI95<-meanData$seMR*1.96
+meanData$CI95<-CI95
+```
+
+```{r}
+library(plotrix)
+meanMR<-ddply(final, .(vial), function(d) mean(d$umoleO2hrg, na.rm=T))
+names(meanMR)<-c("vial","meanMR")
+sdMR<-ddply(final, .(vial), function(d) sd(d$umoleO2hrg, na.rm=T))
+names(sdMR)<-c("vial","sdMR")
+seMR<-ddply(final, .(vial), function(d) std.error(d$umoleO2hrg, na.rm=T))
+names(seMR)<-c("treatment","seMR")
+meanData<-merge(meanMR, sdMR)
+meanData<-merge(meanData, seMR)
+meanData<-merge(meanData, seMR)
+CI95<-meanData$seMR*1.96
+meanData$CI95<-CI95
+```
+
+```{r}
+library(ggplot2)
+library(grid)
+p=ggplot(meanData,aes(vial, meanMR))
+p+geom_line()+
+geom_errorbar(aes(ymax=meanMR+CI95, ymin=meanMR-CI95), width=0.1)+
+theme(axis.text.x=element_text(size=12),
+axis.text.y=element_text(size=12),
+axis.title.y=element_text(vjust=-0.1,angle=90, size=14),
+axis.title.x=element_text(size=14),
+plot.margin=unit(c(1, 1, 1, 2), "lines"))+
+theme_bw()
+```
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+final$vial<-as.character(final$vial)
+final%>%
+  ggplot(aes(x=vial,y=umoleO2hrg,fill=vial))+
+  geom_col()+
+  facet_wrap(~treatment)
+```

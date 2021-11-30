@@ -86,9 +86,9 @@ dataCombin$umoleO2<-(dataCombin$oxygen/100)*dataCombin$O2sat
 
 
 ```{r}
-head(dataCombin)
 dataCombin$time<-as.numeric(dataCombin$time)
 ```
+
 ```{r}
 dataCombin$treatment<-as.numeric(dataCombin$treatment)
 ```
@@ -194,3 +194,26 @@ final%>%
   geom_col()+
   facet_wrap(~treatment)
 ```
+```{r}
+view(dataCombin)
+```
+
+```{r}
+dataCombin$vial<-as.character(dataCombin$vial)
+dataCombin%>%
+  ggplot(aes(x=time,y=oxygen,color=vial))+
+  geom_point()+
+  geom_smooth(method=lm, se=FALSE)+
+  facet_wrap(~treatment)+
+  theme(axis.text.x = element_text(angle = 60,size=8))
+```
+```{r}
+dataCombin%>%
+  group_by(vial)%>%
+  filter(time<1000)%>%
+  filter(treatment==1)
+```
+```{r}
+view(data)
+```
+

@@ -1,0 +1,57 @@
+---
+title: "LORR"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+LORR<-read.csv("LORR MC MP.csv")
+```
+
+```{r}
+LORR1<-LORR%>%
+  mutate(Log_Length=log(Length))%>%
+  mutate(Log_Weight=log(Weight))
+```
+
+```{r}
+Linear<-lm(Log_Weight~Log_Length, data = LORR1)
+print(Linear)
+```
+
+```{r}
+summary(Linear)
+```
+```{r}
+LORR1%>%
+  ggplot(aes(x=Log_Length,y=Log_Weight))+
+  geom_point()+
+  geom_smooth(method = lm,formula = y ~ x,se=F)
+```
+
+```{r}
+LORR1%>%
+  ggplot(aes(x=Length,y=Temp_Ave,color=Date))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
+```
+```{r}
+LORR1%>%
+  ggplot(aes(x=Length,y=Temp_Ave))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
+```
+```{r}
+LORR1%>%
+  ggplot(aes(x=Weight,y=Temp_Ave,color=Date))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
+```
+

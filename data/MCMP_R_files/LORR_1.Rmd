@@ -12,7 +12,7 @@ library(tidyverse)
 
 
 ```{r}
-LORR<-read.csv("LORR MC MP.csv")
+LORR<-read.csv("LORR MC MP_Final.csv")
 ```
 
 ```{r}
@@ -20,6 +20,20 @@ LORR1<-LORR%>%
   mutate(Log_Length=log(Length))%>%
   mutate(Log_Weight=log(Weight))
 ```
+
+```{r}
+Body_index<-as.numeric(LORR$Body.Index)
+LORR1<-LORR1%>%
+  add_column(Body_index)
+```
+
+
+```{r}
+LORR1_filtered<-LORR1%>%
+  filter(Temp1!="NA")
+```
+
+
 
 ```{r}
 Linear<-lm(Log_Weight~Log_Length, data = LORR1)
@@ -42,16 +56,59 @@ LORR1%>%
   geom_point()+
   geom_smooth(se=F,method = lm)
 ```
+
+
 ```{r}
 LORR1%>%
-  ggplot(aes(x=Length,y=Temp_Ave))+
+  ggplot(aes(x=Body_index,y=Temp_Ave))+
   geom_point()+
   geom_smooth(se=F,method = lm)
 ```
 ```{r}
-LORR1%>%
+LORR1_filtered%>%
   ggplot(aes(x=Weight,y=Temp_Ave,color=Date))+
   geom_point()+
   geom_smooth(se=F,method = lm)
+```
+
+```{r}
+LORR1_filtered%>%
+  ggplot(aes(x=Body_index,y=Temp_Ave,color=Date))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
+```
+
+```{r}
+LORR1_filtered%>%
+  group_by(Date)%>%
+  summarise(mean_temp=mean(Temp_Ave))%>%
+  ggplot(aes(x=Date,y=mean_temp,color=Date))+
+  geom_point()
+```
+
+```{r}
+LORR1_filtered%>%
+  ggplot(aes(x=Date,y=Temp_Ave,color=Date))+
+  geom_boxplot()
+```
+```{r}
+LORR1_filtered%>%
+  group_by(Date)%>%
+  summarise(mean_BI=mean(Body_index))%>%
+  ggplot(aes(x=Date,y=mean_BI,color=Date))+
+  geom_point()
+```
+```{r}
+LORR1_filtered%>%
+  group_by(Date)%>%
+  summarise(mean_BI=mean(Body_index),
+            mean_LORR=mean(Temp_Ave))%>%
+  ggplot(aes(x=mean_BI,y=mean_LORR,color=Date))+
+  geom_point(size=3)
+```
+```{r}
+LORR1_filtered%>%
+  ggplot(aes(x=Date,y=Body_index,color=Date))+
+  geom_boxplot()
 ```
 

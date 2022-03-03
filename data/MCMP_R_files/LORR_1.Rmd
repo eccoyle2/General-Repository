@@ -85,6 +85,23 @@ LORR1_filtered%>%
   ggplot(aes(x=Date,y=mean_temp,color=Date))+
   geom_point()
 ```
+```{r}
+one_way<-aov(Temp_Ave~Date, data = LORR1_filtered)
+summary(one_way)
+```
+```{r}
+one_way_bi<-aov(Body_index~Date, data = LORR1_filtered)
+summary(one_way_bi)
+```
+
+
+```{r}
+TukeyHSD(one_way)
+```
+```{r}
+TukeyHSD(one_way_bi)
+```
+
 
 ```{r}
 LORR1_filtered%>%
@@ -110,5 +127,126 @@ LORR1_filtered%>%
 LORR1_filtered%>%
   ggplot(aes(x=Date,y=Body_index,color=Date))+
   geom_boxplot()
+```
+```{r}
+library(moderndive)
+```
+
+```{r}
+BI_model<-lm(Temp_Ave~Body_index, data = LORR1_filtered)
+```
+
+```{r}
+get_regression_table(BI_model)
+```
+```{r}
+get_regression_summaries(BI_model)
+```
+```{r}
+library(broom)
+```
+
+
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Body_index, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Body_index, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = r.squared, fill=Date)) +
+    geom_bar(stat = "identity") +
+    labs(x = "Date", y = expression(R^{2}))
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Body_index, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for BI impact on LOEB Temp")
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Weight, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Weight impact on LOEB Temp")
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Length, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Length impact on LOEB Temp")
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Length + Weight + Width, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Measurments vs LOEB Temp")
+```
+
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Length + Weight, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Measurments-2 vs LOEB Temp")
+```
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Width + Weight, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Measurments-3 vs LOEB Temp")
+```
+
+```{r}
+LORR1_filtered%>%
+nest(-Date) %>% 
+  mutate(fit = map(data, ~ lm(Temp_Ave ~ Width, data = .)),
+         results = map(fit, glance)) %>% 
+  unnest(results)%>%
+ggplot(aes(x = factor(Date), y = round(p.value, digits = 4), fill=Date)) +
+    geom_bar(stat = "identity") +
+  geom_text(aes(label=round(p.value, digits = 4), vjust=1))+
+    labs(x = "Date", y = "P value for Width vs LOEB Temp")
+```
+```{r}
+LORR1_filtered%>%
+  ggplot(aes(x=Width,y=Temp_Ave,color=Date))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
 ```
 

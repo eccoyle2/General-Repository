@@ -135,7 +135,7 @@ library(moderndive)
 ```{r}
 BI_model<-lm(Temp_Ave~Body_index, data = LORR1_filtered)
 ```
-
+##
 ```{r}
 get_regression_table(BI_model)
 ```

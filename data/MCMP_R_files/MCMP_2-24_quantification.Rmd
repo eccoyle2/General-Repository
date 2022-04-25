@@ -1,0 +1,107 @@
+---
+title: "Quantification-2-24"
+author: "Eric Coyle"
+date: "24/4/2022"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(naniar)
+```
+```{r}
+Thermal24<-read.csv("MCMP_quantify.csv")
+```
+
+```{r}
+Thermal24_new<-Thermal24%>%
+  mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
+  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))
+```
+```{r}
+Thermal24_new%>%
+  ggplot(aes(x=ID, y=Adjusted_microplastic_load,fill=ID))+
+  geom_col()
+```
+
+```{r}
+Thermal24_3<-Thermal24_new%>%
+  filter(Adjusted_microplastic_load>0)
+```
+
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=ID, y=Adjusted_microplastic_load,fill=ID))+
+  geom_col()+
+  theme(axis.text.x = element_text(angle = 90, size = 7, vjust = 1))
+```
+
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load, y=Ave_temp))+
+  geom_point()+
+  geom_smooth(se=F,method=lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load, y=Body._index))+
+  geom_point()+
+  geom_smooth(se=F,method=lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load, y=Weight))+
+  geom_point()+
+  geom_smooth(se=F,method=lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load, y=Length))+
+  geom_point()+
+  geom_smooth(se=F,method=lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load, y=Width))+
+  geom_point()+
+  geom_smooth(se=F,method=lm)
+```
+```{r}
+library(broom)
+library(moderndive)
+```
+
+
+```{r}
+MP_model<-lm(Ave_temp~Adjusted_microplastic_load, data = Thermal24_3)
+```
+
+```{r}
+get_regression_table(MP_model)
+```
+```{r}
+get_regression_summaries(MP_model)
+```
+```{r}
+Length_model<-lm(Length~Adjusted_microplastic_load, data = Thermal24_3)
+get_regression_table(Length_model)
+```
+```{r}
+Weight_model<-lm(Weight~Adjusted_microplastic_load, data = Thermal24_3)
+get_regression_table(Weight_model)
+```
+```{r}
+BI_model_2<-lm(Body._index~Adjusted_microplastic_load, data = Thermal24_3)
+get_regression_table(BI_model_2)
+```
+```{r}
+Width_model<-lm(Width~Adjusted_microplastic_load, data = Thermal24_3)
+get_regression_table(Width_model)
+```
+

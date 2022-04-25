@@ -31,6 +31,7 @@ LORR1<-LORR1%>%
 ```{r}
 LORR1_filtered<-LORR1%>%
   filter(Temp1!="NA")
+LORR1_filtered$Temp_Ave<-as.numeric(LORR1_filtered$Temp_Ave)
 ```
 
 
@@ -51,7 +52,7 @@ LORR1%>%
 ```
 
 ```{r}
-LORR1%>%
+LORR1_filtered%>%
   ggplot(aes(x=Length,y=Temp_Ave,color=Date))+
   geom_point()+
   geom_smooth(se=F,method = lm)

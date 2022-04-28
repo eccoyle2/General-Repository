@@ -91,11 +91,22 @@ get_regression_summaries(MP_model)
 ```{r}
 Length_model<-lm(Length~Adjusted_microplastic_load, data = Thermal24_3)
 get_regression_table(Length_model)
+get_regression_summaries(Length_model)
 ```
 ```{r}
 Weight_model<-lm(Weight~Adjusted_microplastic_load, data = Thermal24_3)
 get_regression_table(Weight_model)
+get_regression_summaries(Weight_model)
 ```
+
+
+
+```{r}
+BIT_model<-lm(Ave_temp~Body._index, data = Thermal24_3)
+get_regression_table(BIT_model)
+get_regression_summaries(BIT_model)
+```
+
 ```{r}
 BI_model_2<-lm(Body._index~Adjusted_microplastic_load, data = Thermal24_3)
 get_regression_table(BI_model_2)
@@ -103,5 +114,50 @@ get_regression_table(BI_model_2)
 ```{r}
 Width_model<-lm(Width~Adjusted_microplastic_load, data = Thermal24_3)
 get_regression_table(Width_model)
+get_regression_summaries(Width_model)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Parasite_load,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(se=F,method =lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Parasite_load,y=Body._index))+
+  geom_point()+
+  geom_smooth(se=F,method =lm)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Parasite_load,y=Adjusted_microplastic_load))+
+  geom_point()+
+  geom_smooth(se=F,method =lm)
+```
+```{r}
+parasite_model<-lm(Adjusted_microplastic_load~Parasite_load, data = Thermal24_3)
+get_regression_table(parasite_model)
+```
+```{r}
+PBI_model<-lm(Body._index~Parasite_load, data = Thermal24_3)
+get_regression_table(PBI_model)
+```
+
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Body._index,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(se=F,method =lm)
+```
+
+```{r}
+Mixed_model<-lm(Ave_temp~Parasite_load+Adjusted_microplastic_load, data = Thermal24_3)
+get_regression_table(Mixed_model)
+```
+```{r}
+Thermal24_3%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,size=Parasite_load))+
+  geom_point()+
+  geom_smooth(se=F,method = lm)
 ```
 

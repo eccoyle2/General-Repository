@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(naniar)
 ```
+
 ```{r}
 Thermal24<-read.csv("MCMP_quantify.csv")
 ```
@@ -22,8 +23,9 @@ Thermal24<-read.csv("MCMP_quantify.csv")
 ```{r}
 Thermal24_new<-Thermal24%>%
   mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
-  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))
+  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))%>%mutate(Ave_temp = as.numeric(Ave_temp))%>%mutate(Micoplastic_load = as.numeric(Microplastic_load))
 ```
+
 ```{r}
 Thermal24_new%>%
   ggplot(aes(x=ID, y=Adjusted_microplastic_load,fill=ID))+
@@ -34,6 +36,8 @@ Thermal24_new%>%
 Thermal24_3<-Thermal24_new%>%
   filter(Adjusted_microplastic_load>0)
 ```
+
+
 
 ```{r}
 Thermal24_3%>%
@@ -54,6 +58,7 @@ Thermal24_3%>%
   geom_point()+
   geom_smooth(se=F,method=lm)
 ```
+
 ```{r}
 Thermal24_3%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Weight))+
@@ -130,7 +135,7 @@ Thermal24_3%>%
 ```
 ```{r}
 Thermal24_3%>%
-  ggplot(aes(x=Parasite_load,y=Adjusted_microplastic_load))+
+  ggplot(aes(x=Adjusted_microplastic_load,y=Parasite_load))+
   geom_point()+
   geom_smooth(se=F,method =lm)
 ```
@@ -156,8 +161,19 @@ get_regression_table(Mixed_model)
 ```
 ```{r}
 Thermal24_3%>%
-  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,size=Parasite_load))+
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=as.factor(Parasite_load)))+
   geom_point()+
   geom_smooth(se=F,method = lm)
 ```
+
+```{r}
+library(haven)
+library(lme4)
+```
+
+```{r}
+library(car)
+```
+
+
 

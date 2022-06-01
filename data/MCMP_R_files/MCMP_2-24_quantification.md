@@ -76,7 +76,8 @@ Thermal24<-read.csv("MCMP_quantify.csv")
 ```r
 Thermal24_new<-Thermal24%>%
   mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
-  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))%>%mutate(Ave_temp = as.numeric(Ave_temp))%>%mutate(Micoplastic_load = as.numeric(Microplastic_load))
+  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))%>%mutate(Ave_temp = as.numeric(Ave_temp))%>%mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
+  mutate(Parasite_load=as.integer(Parasite_load))
 ```
 
 
@@ -87,7 +88,7 @@ Thermal24_new%>%
 ```
 
 ```
-## Warning: Removed 1 rows containing missing values (position_stack).
+## Warning: Removed 3 rows containing missing values (position_stack).
 ```
 
 ![](MCMP_2-24_quantification_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
@@ -216,9 +217,10 @@ get_regression_table(MP_model)
 ## # A tibble: 2 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                   33.4     0.403    82.7     0         32.5     34.2
-## 2 Adjusted_microplastic_~      0       0        -0.753   0.457      0        0
+## 1 intercept                   32.6     0.299   109.        0       32.0     33.2
+## 2 Adjusted_microplastic_~      0       0        -0.527     0.6      0        0
 ```
+
 
 ```r
 get_regression_summaries(MP_model)
@@ -228,7 +230,7 @@ get_regression_summaries(MP_model)
 ## # A tibble: 1 x 9
 ##   r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
 ##       <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
-## 1     0.016        -0.013  2.71  1.65  1.69     0.566   0.457     1    36
+## 1     0.004        -0.011  3.37  1.84  1.86     0.278     0.6     1    67
 ```
 
 ```r
@@ -240,8 +242,8 @@ get_regression_table(Length_model)
 ## # A tibble: 2 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                   18.6      1.31    14.2     0         16.0     21.3
-## 2 Adjusted_microplastic_~      0        0        0.534   0.597      0        0
+## 1 intercept                   18.9     0.885     21.4     0        17.1     20.7
+## 2 Adjusted_microplastic_~      0       0          1.62    0.11      0        0
 ```
 
 ```r
@@ -252,7 +254,7 @@ get_regression_summaries(Length_model)
 ## # A tibble: 1 x 9
 ##   r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
 ##       <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
-## 1     0.008         -0.02  30.6  5.53  5.68     0.285   0.597     1    38
+## 1     0.038         0.023  30.5  5.52  5.60      2.63    0.11     1    69
 ```
 
 ```r
@@ -264,8 +266,8 @@ get_regression_table(Weight_model)
 ## # A tibble: 2 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                   1.46     0.243     6.00    0        0.967     1.95
-## 2 Adjusted_microplastic_~     0        0         0.082   0.935    0         0
+## 1 intercept                   1.39     0.173      8.03   0         1.05     1.74
+## 2 Adjusted_microplastic_~     0        0          1.31   0.196     0        0
 ```
 
 ```r
@@ -276,7 +278,7 @@ get_regression_summaries(Weight_model)
 ## # A tibble: 1 x 9
 ##   r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
 ##       <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
-## 1         0        -0.028  1.05  1.02  1.05     0.007   0.935     1    38
+## 1     0.025          0.01  1.17  1.08  1.10      1.71   0.196     1    69
 ```
 
 
@@ -291,8 +293,8 @@ get_regression_table(BIT_model)
 ## # A tibble: 2 x 7
 ##   term        estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>          <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept     32.9        1.25    26.4     0        30.4     35.5 
-## 2 Body._index    0.176      1.09     0.161   0.873    -2.04     2.40
+## 1 intercept     31.5       0.962     32.8    0       29.6      33.5 
+## 2 Body._index    0.967     0.899      1.08   0.286   -0.829     2.76
 ```
 
 ```r
@@ -303,7 +305,7 @@ get_regression_summaries(BIT_model)
 ## # A tibble: 1 x 9
 ##   r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
 ##       <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
-## 1     0.001        -0.029  2.75  1.66  1.71     0.026   0.873     1    36
+## 1     0.017         0.002  3.33  1.82  1.85      1.16   0.286     1    67
 ```
 
 
@@ -316,8 +318,8 @@ get_regression_table(BI_model_2)
 ## # A tibble: 2 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                   1.13     0.061    18.6     0         1.01     1.25
-## 2 Adjusted_microplastic_~     0        0        -0.658   0.515     0        0
+## 1 intercept                   1.06      0.04    26.5     0        0.976     1.13
+## 2 Adjusted_microplastic_~     0         0       -0.767   0.446    0         0
 ```
 
 ```r
@@ -329,8 +331,8 @@ get_regression_table(Width_model)
 ## # A tibble: 2 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                   10.5     0.696    15.1      0        9.09     11.9
-## 2 Adjusted_microplastic_~      0       0         0.634    0.53     0         0
+## 1 intercept                   10.9     0.478     22.8    0         9.94     11.8
+## 2 Adjusted_microplastic_~      0       0          1.31   0.195     0         0
 ```
 
 ```r
@@ -341,7 +343,7 @@ get_regression_summaries(Width_model)
 ## # A tibble: 1 x 9
 ##   r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
 ##       <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
-## 1     0.011        -0.016  8.59  2.93  3.01     0.402    0.53     1    38
+## 1     0.025          0.01  8.88  2.98  3.02      1.71   0.195     1    69
 ```
 
 ```r
@@ -400,8 +402,8 @@ get_regression_table(parasite_model)
 ## # A tibble: 2 x 7
 ##   term          estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>            <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept       11296.     1972.      5.73   0        7296.   15296.
-## 2 Parasite_load    -593.      548.     -1.08   0.286   -1704.     517.
+## 1 intercept       38857.     7351.     5.29    0       24185.   53529.
+## 2 Parasite_load     866.     1871.     0.463   0.645   -2869.    4600.
 ```
 
 ```r
@@ -413,8 +415,8 @@ get_regression_table(PBI_model)
 ## # A tibble: 2 x 7
 ##   term          estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>            <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept        1.11      0.052    21.4      0       1.01     1.22 
-## 2 Parasite_load   -0.005     0.014    -0.348    0.73   -0.034    0.024
+## 1 intercept        1.03      0.038    27.0      0       0.951    1.10 
+## 2 Parasite_load    0.004     0.01      0.373    0.71   -0.016    0.023
 ```
 
 
@@ -449,9 +451,9 @@ get_regression_table(Mixed_model)
 ## # A tibble: 3 x 7
 ##   term                    estimate std_error statistic p_value lower_ci upper_ci
 ##   <chr>                      <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-## 1 intercept                 33.5       0.487    68.8     0       32.5      34.5 
-## 2 Parasite_load             -0.046     0.097    -0.48    0.634   -0.243     0.15
-## 3 Adjusted_microplastic_~    0         0        -0.825   0.416    0         0
+## 1 intercept                 32.9       0.339     96.9    0       32.2     33.6  
+## 2 Parasite_load             -0.102     0.072     -1.43   0.158   -0.245    0.041
+## 3 Adjusted_microplastic_~    0         0         -0.46   0.647    0        0
 ```
 
 ```r
@@ -476,66 +478,31 @@ Thermal24_3%>%
 ![](MCMP_2-24_quantification_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
 
 
-```r
-library(haven)
-```
-
-```
-## Warning: package 'haven' was built under R version 4.1.3
-```
 
 ```r
-library(lme4)
-```
-
-```
-## Warning: package 'lme4' was built under R version 4.1.3
-```
-
-```
-## Loading required package: Matrix
-```
-
-```
-## 
-## Attaching package: 'Matrix'
-```
-
-```
-## The following objects are masked from 'package:tidyr':
-## 
-##     expand, pack, unpack
+Thermal_4<-Thermal24_3%>%
+  mutate(Infection_status=if_else(Parasite_load>0,"infected","uninfected"))
 ```
 
 
 ```r
-library(car)
+Thermal_4%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Infection_status))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
 ```
 
 ```
-## Loading required package: carData
+## `geom_smooth()` using formula 'y ~ x'
 ```
 
 ```
-## Warning: package 'carData' was built under R version 4.1.3
+## Warning: Removed 2 rows containing non-finite values (stat_smooth).
 ```
 
 ```
-## 
-## Attaching package: 'car'
+## Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     recode
-```
-
-```
-## The following object is masked from 'package:purrr':
-## 
-##     some
-```
-
-
+![](MCMP_2-24_quantification_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
 

@@ -23,7 +23,8 @@ Thermal24<-read.csv("MCMP_quantify.csv")
 ```{r}
 Thermal24_new<-Thermal24%>%
   mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
-  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))%>%mutate(Ave_temp = as.numeric(Ave_temp))%>%mutate(Micoplastic_load = as.numeric(Microplastic_load))
+  mutate(Adjusted_microplastic_load = as.numeric(Adjusted_microplastic_load))%>%mutate(Ave_temp = as.numeric(Ave_temp))%>%mutate(Micoplastic_load = as.numeric(Microplastic_load))%>%
+  mutate(Parasite_load=as.integer(Parasite_load))
 ```
 
 ```{r}
@@ -90,6 +91,7 @@ MP_model<-lm(Ave_temp~Adjusted_microplastic_load, data = Thermal24_3)
 ```{r}
 get_regression_table(MP_model)
 ```
+
 ```{r}
 get_regression_summaries(MP_model)
 ```
@@ -166,14 +168,16 @@ Thermal24_3%>%
   geom_smooth(se=F,method = lm)
 ```
 
+
 ```{r}
-library(haven)
-library(lme4)
+Thermal_4<-Thermal24_3%>%
+  mutate(Infection_status=if_else(Parasite_load>0,"infected","uninfected"))
 ```
 
 ```{r}
-library(car)
+Thermal_4%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Infection_status))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
 ```
-
-
 

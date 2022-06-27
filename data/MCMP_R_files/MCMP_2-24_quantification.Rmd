@@ -41,39 +41,39 @@ Thermal24_3<-Thermal24_new%>%
 
 
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=ID, y=Adjusted_microplastic_load,fill=ID))+
   geom_col()+
   theme(axis.text.x = element_text(angle = 90, size = 7, vjust = 1))
 ```
 
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Ave_temp))+
   geom_point()+
   geom_smooth(se=F,method=lm)
 ```
 ```{r}
-Thermal24_3%>%
+Thermal_4%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Body._index))+
   geom_point()+
   geom_smooth(se=F,method=lm)
 ```
 
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Weight))+
   geom_point()+
   geom_smooth(se=F,method=lm)
 ```
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Length))+
   geom_point()+
   geom_smooth(se=F,method=lm)
 ```
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Adjusted_microplastic_load, y=Width))+
   geom_point()+
   geom_smooth(se=F,method=lm)
@@ -85,7 +85,7 @@ library(moderndive)
 
 
 ```{r}
-MP_model<-lm(Ave_temp~Adjusted_microplastic_load, data = Thermal24_3)
+MP_model<-lm(Ave_temp~Adjusted_microplastic_load, data = Thermal_5)
 ```
 
 ```{r}
@@ -96,12 +96,12 @@ get_regression_table(MP_model)
 get_regression_summaries(MP_model)
 ```
 ```{r}
-Length_model<-lm(Length~Adjusted_microplastic_load, data = Thermal24_3)
+Length_model<-lm(Length~Adjusted_microplastic_load, data = Thermal_5)
 get_regression_table(Length_model)
 get_regression_summaries(Length_model)
 ```
 ```{r}
-Weight_model<-lm(Weight~Adjusted_microplastic_load, data = Thermal24_3)
+Weight_model<-lm(Weight~Adjusted_microplastic_load, data = Thermal_5)
 get_regression_table(Weight_model)
 get_regression_summaries(Weight_model)
 ```
@@ -109,28 +109,28 @@ get_regression_summaries(Weight_model)
 
 
 ```{r}
-BIT_model<-lm(Ave_temp~Body._index, data = Thermal24_3)
+BIT_model<-lm(Ave_temp~Body._index, data = Thermal_5)
 get_regression_table(BIT_model)
 get_regression_summaries(BIT_model)
 ```
 
 ```{r}
-BI_model_2<-lm(Body._index~Adjusted_microplastic_load, data = Thermal24_3)
+BI_model_2<-lm(Body._index~Adjusted_microplastic_load, data = Thermal_5)
 get_regression_table(BI_model_2)
 ```
 ```{r}
-Width_model<-lm(Width~Adjusted_microplastic_load, data = Thermal24_3)
+Width_model<-lm(Width~Adjusted_microplastic_load, data = Thermal_5)
 get_regression_table(Width_model)
 get_regression_summaries(Width_model)
 ```
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Parasite_load,y=Ave_temp))+
   geom_point()+
   geom_smooth(se=F,method =lm)
 ```
 ```{r}
-Thermal24_3%>%
+Thermal_5%>%
   ggplot(aes(x=Parasite_load,y=Body._index))+
   geom_point()+
   geom_smooth(se=F,method =lm)
@@ -142,16 +142,16 @@ Thermal24_3%>%
   geom_smooth(se=F,method =lm)
 ```
 ```{r}
-parasite_model<-lm(Adjusted_microplastic_load~Parasite_load, data = Thermal24_3)
+parasite_model<-lm(Adjusted_microplastic_load~Parasite_load, data = Thermal_5)
 get_regression_table(parasite_model)
 ```
 ```{r}
-PBI_model<-lm(Body._index~Parasite_load, data = Thermal24_3)
+PBI_model<-lm(Body._index~Parasite_load, data = Thermal_5)
 get_regression_table(PBI_model)
 ```
 
 ```{r}
-Thermal24_3%>%
+Thermal_4%>%
   ggplot(aes(x=Body._index,y=Ave_temp))+
   geom_point()+
   geom_smooth(se=F,method =lm)
@@ -170,7 +170,7 @@ Thermal24_3%>%
 
 
 ```{r}
-Thermal_4<-Thermal24_3%>%
+Thermal_4<-Thermal24_new%>%
   mutate(Infection_status=if_else(Parasite_load>0,"infected","uninfected"))
 ```
 
@@ -179,5 +179,164 @@ Thermal_4%>%
   ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Infection_status))+
   geom_point()+
   geom_smooth(method = lm,se=F)
+```
+```{r}
+Thermal_4%>%
+  ggplot(aes(x=Infection_status,y=Adjusted_microplastic_load,color=X))+
+  geom_boxplot()+
+  facet_wrap(~X)
+```
+```{r}
+Thermal_4%>%
+  ggplot(aes(x=Infection_status,y=Body._index,color=X))+
+  geom_boxplot()+
+  facet_wrap(~X)+
+  theme(axis.text.x = element_text(angle = 60))
+```
+```{r}
+Thermal_4%>%
+  ggplot(aes(x=Infection_status,y=Length,color=Infection_status))+
+  geom_boxplot()
+```
+```{r}
+  Parasite_AOV<-aov(Length~Infection_status, data = Thermal_4)
+summary(Parasite_AOV)
+```
+```{r}
+Thermal_4%>%
+  ggplot(aes(x=Infection_status,y=Width,color=Infection_status))+
+  geom_boxplot()
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Body._index,color=Infection_status))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Body._index,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Infection_status)
+```
+```{r}
+Thermal_5<-Thermal_4%>%
+  filter(X!="2/16/2022")
+```
+
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Infection_status))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Parasite_load,y=Ave_temp, size=Adjusted_microplastic_load))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+
+```{r}
+Revised_parasite_model<-lm(Ave_temp~Parasite_load, data = Thermal_5)
+get_regression_table(Revised_parasite_model)
+```
+```{r}
+BI_model_2<-lm(Ave_temp~Parasite_load, data = Thermal_5)
+get_regression_summaries(BI_model_2)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Parasite_load,y=Length))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+```{r}
+MUlti_model_2<-lm(Ave_temp~Parasite_load*Sex,data = Thermal_5)
+```
+
+```{r}
+get_regression_summaries(MUlti_model_2)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Parasite_load,y=Ave_temp,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Sex,y=Parasite_load,color=Sex))+
+  geom_boxplot()
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Body._index,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Length,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Parasite_load,y=Length,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+```{r}
+Thermal_5%>%
+  filter(Sex=="F"&Infection_status=="infected")%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+```{r}
+Thermal_5%>%
+  filter(Sex=="F"&Infection_status=="uninfected")%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+
+```{r}
+Thermal_5%>%
+  filter(Sex=="M"&Infection_status=="uninfected")%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)
+```
+```{r}
+Thermal_5%>%
+  ggplot(aes(x=Adjusted_microplastic_load,y=Ave_temp,color=Sex))+
+  geom_point()+
+  geom_smooth(method = lm,se=F)+
+  facet_wrap(~Sex)
+```
+```{r}
+Thermal_5F<-Thermal_5%>%
+  filter(Sex=="F")
+```
+
+```{r}
+Female_mp_model<-lm(Ave_temp~Adjusted_microplastic_load,data=Thermal_5F)
+get_regression_summaries(Female_mp_model)
 ```
 

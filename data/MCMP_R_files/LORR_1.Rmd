@@ -12,7 +12,7 @@ library(tidyverse)
 
 
 ```{r}
-LORR<-read.csv("LORR MC MP_Final.csv")
+LORR<-read.csv("MCMP_quantify.csv")
 ```
 
 ```{r}
@@ -22,7 +22,7 @@ LORR1<-LORR%>%
 ```
 
 ```{r}
-Body_index<-as.numeric(LORR$Body.Index)
+Body_index<-as.numeric(LORR$Body._index)
 LORR1<-LORR1%>%
   add_column(Body_index)
 ```
@@ -37,8 +37,7 @@ LORR1_filtered$Temp_Ave<-as.numeric(LORR1_filtered$Temp_Ave)
 
 
 ```{r}
-Linear<-lm(Log_Weight~Log_Length, data = LORR1)
-print(Linear)
+
 ```
 
 ```{r}
